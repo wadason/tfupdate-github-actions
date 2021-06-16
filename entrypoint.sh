@@ -18,8 +18,7 @@ function subcommandTerraform {
       echo "No changes"
     else
       if [ "${UPDATE_TFENV_VERSION_FILES}" == "1" ]; then
-        for UPDATED_HCL in $(git diff --cached --name-only); do
-          TFENV_VERSION_FILE="$(dirname $UPDATED_HCL)/.terraform-version"
+        for TFENV_VERSION_FILE in $(find ${TFUPDATE_PATH} -name .terraform-version);do
           if [ -f "$TFENV_VERSION_FILE" ]; then
             echo "$VERSION" > "$TFENV_VERSION_FILE"
           fi
